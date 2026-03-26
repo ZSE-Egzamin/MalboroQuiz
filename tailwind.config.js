@@ -16,6 +16,12 @@ export default {
           '0%': { transform: 'translateY(0) scale(1)', opacity: '0.6' },
           '100%': { transform: 'translateY(-60px) scale(2.0)', opacity: '0' }, // Wyżej i szerzej
         },
+        'smoke-heavy': {
+          '0%': { transform: 'translateY(0) scale(1) rotate(0deg)', opacity: '0' },
+          '20%': { opacity: '0.8' },
+          '50%': { transform: 'translateY(-60px) scale(2.5) rotate(15deg)', opacity: '0.4' },
+          '100%': { transform: 'translateY(-120px) scale(4) rotate(-15deg)', opacity: '0' },
+        },
         'burn-out': {
           '0%': { opacity: '1', transform: 'scale(1) translateY(0)', filter: 'blur(0)' },
           '50%': { opacity: '0.5', filter: 'blur(2px)' },
@@ -25,6 +31,7 @@ export default {
       animation: {
         'smoke-dense': 'smoke-rise-dense 2s infinite ease-out',
         'burn': 'burn-out 5s linear forwards',
+        'smoke-heavy': 'smoke-heavy 4s ease-in-out infinite',
       }
     },
   },
