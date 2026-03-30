@@ -1,16 +1,70 @@
-# React + Vite
+🎓 MalboroQuiz - System Egzaminacyjny INF.04
+Aplikacja webowa wspierająca naukę programowania i przygotowanie do egzaminu zawodowego INF.04 (Projektowanie, programowanie i testowanie aplikacji). System pozwala na rozwiązywanie zadań praktycznych z zakresu Console App (C#) oraz Web App (React/Angular), oferując natychmiastowy, inteligentny feedback od sztucznej inteligencji.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Główne Funkcjonalności
+Inteligentny Egzaminator: Automatyczna ocena kodu przy użyciu modelu Llama 3.3 (Groq API), która analizuje zgodność z arkuszem CKE.
 
-Currently, two official plugins are available:
+Szczegółowy Feedback: System nie tylko ocenia "zaliczone/niezaliczone", ale wskazuje konkretne błędy w kodzie <code class='err'> i sugeruje poprawki <code class='fix'>.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Obsługa Wielu Kategorii:
 
-## React Compiler
+Console App: Zadania z algorytmiki, sortowania i wyszukiwania w C#.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Web App: Tworzenie komponentów w React/Angular z wykorzystaniem Bootstrapa.
 
-## Expanding the ESLint configuration
+Dynamiczny Edytor: Wbudowane środowisko do pisania kodu bezpośrednio w przeglądarce.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🛠 Technologia
+Frontend
+React + Vite: Szybkie i nowoczesne środowisko deweloperskie.
+
+Tailwind CSS: Nowoczesna stylizacja UI.
+
+Bootstrap: Wykorzystywany w zadaniach egzaminacyjnych zgodnie z wytycznymi CKE.
+
+Backend
+Node.js + Express: Serwer pośredniczący w komunikacji z API.
+
+Groq SDK: Integracja z szybkim modelem Llama 3.3 do analizy kodu.
+
+JSON Response Format: Zapewnia stabilną strukturę danych przesyłanych do frontendu.
+
+📦 Struktura Projektu
+Plaintext
+MalboroQuiz/
+├── client/                # Aplikacja React (Vite)
+│   ├── src/
+│   │   ├── App.jsx        # Główna logika i UI
+│   │   └── index.css      # Style, w tym klasy .err i .fix dla feedbacku
+│   └── public/            # Zasoby statyczne (ikony, grafiki)
+├── server/                # Serwer Express.js
+│   ├── server.js          # Endpoint /api/check i logika promptów AI
+│   └── .env               # Klucze API (GROQ_API_KEY)
+└── README.md
+⚙️ Instalacja i Uruchomienie
+Sklonuj repozytorium:
+
+Bash
+git clone https://github.com/twoj-user/MalboroQuiz.git
+Skonfiguruj serwer:
+
+Przejdź do folderu server/.
+
+Zainstaluj zależności: npm install.
+
+Stwórz plik .env i dodaj swój klucz: GROQ_API_KEY=twoj_klucz_tutaj.
+
+Uruchom serwer: node server.js.
+
+Uruchom aplikację kliencką:
+
+Przejdź do folderu client/.
+
+Zainstaluj zależności: npm install.
+
+Uruchom projekt: npm run dev.
+------------------------------------------------------------------
+
+Autorzy: Kamil Nowakowski, Mateusz Wiewióra, Jakub Wrzesień
+
+Status Projektu: Wstępnie ukończony (Wersja 1.0)
