@@ -40,13 +40,13 @@ export default function App() {
   
   const timerRef = useRef(null);
 
-  // Logika Timera
+  // POPRAWKA LOGIKI TIMERA (current zamiast useRef)
   useEffect(() => {
     if (isTimerRunning && time > 0) {
-      timerRef.useRef = setInterval(() => {
+      timerRef.current = setInterval(() => {
         setTime((prev) => {
           if (prev <= 1) {
-            clearInterval(timerRef.useRef);
+            clearInterval(timerRef.current);
             setIsTimerRunning(false);
             setExamFinished(true);
             return 0;
@@ -55,9 +55,9 @@ export default function App() {
         });
       }, 1000);
     } else {
-      clearInterval(timerRef.useRef);
+      clearInterval(timerRef.current);
     }
-    return () => clearInterval(timerRef.useRef);
+    return () => clearInterval(timerRef.current);
   }, [isTimerRunning, time]);
 
   const startExam = () => {
@@ -142,28 +142,63 @@ export default function App() {
             </div>
           )}
 
-          {/* --- TIMER-PAPIEROS Z MOCNIEJSZYM DYMEM --- */}
-          <div className="relative w-full max-w-2xl h-16 mb-12 border-2 border-black rounded-sm bg-white shadow-inner flex items-center">
-            {/* DYM (Mocniejszy, 5 divów) */}
+          {/* --- POPRAWIONY TIMER: PEŁNY PAPIEROS NA START --- */}
+          <div className="relative w-full max-w-2xl h-32 mb-12 flex items-center">
+            
+            {/* 1. WARSTWA POPIOŁU (Pod spodem, zawsze cała) */}
+            <div className="absolute left-0 w-full h-8 bg-gray-200 rounded-sm shadow-inner opacity-50">
+              <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, black 1px, transparent 1px)', backgroundSize: '4px 4px' }}></div>
+            </div>
+
+            {/* 2. KONTENER PAPIEROSA (Skraca się) */}
+            <div 
+              className="relative h-12 flex items-center transition-all duration-1000 ease-linear z-10 overflow-hidden shadow-sm"
+              style={{ 
+                // Jeśli timer nie chodzi i egzamin nie skończony -> 100% szerokości
+                // Jeśli chodzi -> używamy obliczonego postępu (min. 20% żeby został filtr)
+                width: !isTimerRunning && !examFinished ? '100%' : `${Math.max(20, progressWidth)}%`,
+              }}
+            >
+              <img 
+                src={SingleCigaretteImg} 
+                alt="Cigarette" 
+                className="h-full object-left object-cover shrink-0" 
+                style={{ width: '672px' }} 
+              />
+
+              {/* TIMER NA FILTRZE */}
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 font-mono text-xl font-black text-black mix-blend-multiply opacity-80">
+                {isTimerRunning ? formatTime() : inputMinutes + ":00"}
+              </div>
+            </div>
+
+            {/* 3. ŻAR I DYM (Osobny kontener poza overflow-hidden!) */}
             {isTimerRunning && (
-              <div className="absolute -top-16 left-6 flex gap-2 pointer-events-none">
-                <div className="w-2 h-10 bg-gray-400 rounded-full blur-md animate-smoke-dense"></div>
-                <div className="w-3 h-12 bg-gray-300 rounded-full blur-lg animate-smoke-dense delay-100"></div>
-                <div className="w-2.5 h-8 bg-gray-200 rounded-full blur-md animate-smoke-dense delay-200"></div>
-                <div className="w-2 h-14 bg-gray-300 rounded-full blur-lg animate-smoke-dense delay-300"></div>
-                <div className="w-3 h-9 bg-gray-400 rounded-full blur-md animate-smoke-dense delay-400"></div>
+              <div 
+                className="absolute h-12 z-20 transition-all duration-1000 ease-linear pointer-events-none"
+                style={{ left: `${Math.max(20, progressWidth)}%` }}
+              >
+                {/* Żar na styku */}
+                <div className="absolute left-[-4px] top-1/2 -translate-y-1/2">
+                  <div className="w-3 h-10 bg-gradient-to-r from-orange-600 to-transparent blur-[2px] animate-pulse"></div>
+                  <div className="absolute inset-0 w-2 h-8 bg-yellow-500 blur-md animate-ping"></div>
+                </div>
+
+                {/* CIEMNY DYM (Teraz będzie widoczny!) */}
+                <div className="absolute -top-32 -left-4 flex flex-col items-center">
+                  <div className="w-6 h-20 bg-gray-800/40 rounded-full blur-2xl animate-smoke-heavy"></div>
+                  <div className="w-8 h-24 bg-gray-600/30 rounded-full blur-3xl animate-smoke-heavy delay-150 -mt-16"></div>
+                  <div className="w-4 h-12 bg-gray-900/40 rounded-full blur-xl animate-smoke-heavy delay-300 -mt-20"></div>
+                </div>
               </div>
             )}
 
-            {/* Pasek postępu-filtru */}
-            <div 
-              className="absolute top-0 left-0 h-full bg-[#e7bc74] border-r-2 border-black transition-all duration-1000 ease-linear shadow-[inset_-2px_0px_5px_rgba(0,0,0,0.2)]"
-              style={{ width: `${progressWidth}%` }}
-            />
-            {/* Napis czasu - mocna typografia */}
-            <div className="relative z-10 font-mono text-3xl font-black ml-6 mix-blend-difference text-white tracking-tighter shadow-sm">
-              {isTimerRunning ? formatTime() : "CZEKAM NA OGIEŃ..."}
-            </div>
+            {/* Komunikat startowy */}
+            {!isTimerRunning && !examFinished && (
+              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 font-bold text-gray-400 text-[10px] tracking-[0.3em] uppercase">
+                Gotowy do odpalenia
+              </div>
+            )}
           </div>
 
           {/* Blok pytania - skaluje się do treści */}
