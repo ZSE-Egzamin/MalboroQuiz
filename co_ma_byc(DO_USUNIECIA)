@@ -1,8 +1,0 @@
-----------------------FRONTEND------------------------
-  1. Strona główna - wybór konkretnej części egzaminu 
-  - Blok pytanie
-  - Blok na rozwiązanie (input)
-  - Blok na komentarz do inputa (ukryty) [czerowny/zielony]
-  
-  timer
-  przycisk postępu -> po kliknięciu 4 paski postępu (webowa, mobilna, desktopowa, konsolowa)
