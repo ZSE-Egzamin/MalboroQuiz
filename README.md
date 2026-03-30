@@ -63,6 +63,8 @@ Przejdź do folderu client/.
 Zainstaluj zależności: npm install.
 
 Uruchom projekt: npm run dev.
+
+
 ------------------------------------------------------------------
 
 Autorzy: Kamil Nowakowski, Mateusz Wiewióra, Jakub Wrzesień
