@@ -4,7 +4,7 @@ Aplikacja webowa wspierająca naukę programowania i przygotowanie do egzaminu z
 🚀 Główne Funkcjonalności
 Inteligentny Egzaminator: Automatyczna ocena kodu przy użyciu modelu Llama 3.3 (Groq API), która analizuje zgodność z arkuszem CKE.
 
-Szczegółowy Feedback: System nie tylko ocenia "zaliczone/niezaliczone", ale wskazuje konkretne błędy w kodzie <code class='err'> i sugeruje poprawki <code class='fix'>.
+Szczegółowy Feedback: System nie tylko ocenia "zaliczone/niezaliczone", ale wskazuje konkretne błędy w kodzie i sugeruje poprawki.
 
 Obsługa Wielu Kategorii:
 
